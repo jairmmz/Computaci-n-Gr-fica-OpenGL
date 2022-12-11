@@ -63,3 +63,67 @@ void dda(int x0, int y0, int x1, int y1){
 		y = y + ys;
 	}
 }
+
+void drawCircle(float radius)
+{
+	//int n = 7;
+	//int r = 10;
+	int x, y;
+	int x0, y0, x1, y1;	
+	glBegin(GL_POINTS);
+	glColor3f(1.0f,0.0f,0.0f);
+	
+	x = radius*cos(0*DEG2RAD);
+	y = radius*sin(0*DEG2RAD);
+	x0 = ball_x + x;
+	y0 = ball_y - y;
+
+	for (int i=0; i < 360 ; i++)
+	{
+		//double degInRad = i*DEG2RAD;
+		//glVertex2f(x+ball_x  ,y+ball_y  );
+		x1 = ball_x + x;
+		y1 = ball_y - y;
+		
+		dda(x0, y0, x1, y1);
+		x0 = x1;
+		y0 = y1;
+		
+		/*if(i%18==0){
+			r++;
+		}
+		*/
+	}
+	glEnd();
+}
+
+void render( void ){
+	glClear(GL_COLOR_BUFFER_BIT);
+	
+	for( int i = 0; i < 20 ; i++){
+		for( int j =0 ; j<5 ; j++)
+			if( arr[i][j].state == 1){
+			glBegin(GL_POLYGON);
+			glColor3f(0.7,0.7,0.6);
+			glVertex2i(i*50,900-j*52);
+			glVertex2i(i*50,950-j*52);
+			glVertex2i(i*50+45,950-j*52);
+			glVertex2i(i*50+45,900-j*52);
+			glEnd();
+		}
+	}
+	
+	glPointSize(10);
+	glBegin(GL_POLYGON);
+	glColor3f((rand()%255)/255.0,(rand()%255)/255.0,(rand()%255)/255.0);
+	glVertex2i(tray_x-60,2);
+	glVertex2i(tray_x-60,20);
+	glVertex2i(tray_x+60,20);
+	glVertex2i(tray_x+60,2);
+	glEnd();
+	
+	glColor3f((rand()%255)/255.0,(rand()%255)/255.0,(rand()%255)/255.0);
+	drawCircle(10);
+	
+	glFlush();
+}
