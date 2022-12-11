@@ -33,4 +33,33 @@ static int animationPeriod = 4;
 static int isAnimate = 0;
 static int tray_x = 500;
 //static int tray_y = 0;
+const double DEG2RAD = 3.14159/180;
 
+void dda(int x0, int y0, int x1, int y1){
+	float x, y, xs, ys;
+	int dx, dy, st;
+	dx = x1 - x0;
+	dy = y1 - y0;
+	x = x0;
+	y = y0;
+	
+	if(abs(dx) > abs(dy)){
+		st = abs(dx);
+	}else{
+		st = abs(dy);
+	};
+	
+	if(st==0){
+		glVertex2f(x,y);
+		return;
+	}
+	
+	xs = (float)dx/st;
+	ys = (float)dy/st;
+	
+	for(int i=0; i<st; i++){
+		glVertex2f(x,y);
+		x = x + xs;
+		y = y + ys;
+	}
+}
