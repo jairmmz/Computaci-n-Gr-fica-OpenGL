@@ -86,6 +86,9 @@ void drawCircle(float radius)
 
 	for (int i = 0; i < 360; i++)
 	{
+		x = radius * cos(i * DEG2RAD);
+		y = radius * sin(i * DEG2RAD);
+		
 		x1 = ball_x + x;
 		y1 = ball_y - y;
 
